@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="granite/ui/components/coral/foundation/form/radiogroup"
+    fieldLabel="Gender"
+    name="./country">
+    <items jcr:primaryType="nt:unstructured">
+        <male
+            jcr:primaryType="nt:unstructured"
+            text="Male"
+            value="Male"/>
+        <female
+            jcr:primaryType="nt:unstructured"
+            text="Female"
+            value="Female"/>
+    </items>
+</jcr:root>

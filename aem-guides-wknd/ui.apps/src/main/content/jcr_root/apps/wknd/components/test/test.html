@@ -1,0 +1,30 @@
+<div data-sly-use.sdk="com.adobe.aem.guides.wknd.core.models.SlingModelPractice"></div>
+<h2>Name:${sdk.name}</h2>
+<h2>RollNumber:${sdk.rollnumber}</h2>
+Image:<img src="${sdk.image}" alt="image"/>
+<h2>Describe your self:${sdk.text @context='html'}</h2>
+<img src="${sdk.aadhar}" alt="image"/>
+<h2>Country: ${sdk.country}</h2>
+<h2>GETPath: ${sdk.path}</h2>
+<h2>GetParent: ${sdk.parent}</h2>
+
+<sly data-sly-list.obj="${sdk.multiChildNodes}">
+Full Name:${obj.fullname}<br>
+ZipCode:${obj.zipcode}<br>
+Permanent Addrss:${obj.paddress}<br>
+</sly>
+
+<h2>Employee Name:${sdk.ename}</h2>
+<h2>Employee ID:${sdk.eid}</h2>
+Employee img:<img src="${sdk.eimage}" alt="image"/><br>
+
+<sly data-sly-list.ob="${sdk.nestedMultiFieldNode}">
+Employee full Name:${ob.efullname}<br>
+Employee Address:${ob.eaddr}<br>
+Gender:${ob.egender}<br>
+Date Of joining:${'yyyy-MM-dd'@format=ob.edoj}<br>
+Student UserName:${ob.username}<br>
+Password:${ob.password}
+</sly>
+
+
