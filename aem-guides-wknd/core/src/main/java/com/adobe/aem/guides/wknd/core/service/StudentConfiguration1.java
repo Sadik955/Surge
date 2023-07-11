@@ -1,4 +1,4 @@
-package com.adobe.aem.guides.wknd.core.services;
+package com.adobe.aem.guides.wknd.core.service;
 
 
 import org.osgi.service.metatype.annotations.AttributeDefinition;
@@ -9,7 +9,7 @@ import org.osgi.service.metatype.annotations.Option;
 @ObjectClassDefinition(name="Student Details",description="taking data from students")
 public @interface StudentConfiguration1 {
 	
-	@AttributeDefinition(name="Student Name,",
+	@AttributeDefinition(name="Student Name",
 						type=AttributeType.STRING,
 						description="Enter Student Name Here")
 	public  String getStudentName() default "amit";

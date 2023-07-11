@@ -210,5 +210,10 @@ Import-Package: javax.annotation;version=0.0.0,*
             <version>1.4.4</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+        	<groupId>com.adobe.aem.guides</groupId>
+        	<artifactId>aem-guides-sadik.core</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

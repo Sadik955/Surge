@@ -131,9 +131,9 @@ public class SlingModelPractice {
 		return object;
 	}
 	
-//NestedField
+           //NestedField
 	public ArrayList<SlingModelBean> getNestedMultiFieldNode() {
-		ArrayList<SlingModelBean> obj=new ArrayList<SlingModelBean>();
+		ArrayList<SlingModelBean> ob=new ArrayList<SlingModelBean>();
 		SlingModelBean slingModelBean = new SlingModelBean();
 		Resource childResource = resource.getChild("eaddress");
 		
@@ -141,81 +141,51 @@ public class SlingModelPractice {
 		Iterator<Resource> item = childResource.listChildren();
 		while(item.hasNext()) {
 			
-			Resource itemResource = item.next();
+			Resource itemResource1 = item.next();
 			
 			//Nested Multi field Data Employee Tab
-			String efullname= itemResource.getValueMap().get("efullname",String.class);
-			String eaddr= itemResource.getValueMap().get("eaddr",String.class);
-			
+			String efullname= itemResource1.getValueMap().get("efullname",String.class);
+			String eaddr= itemResource1.getValueMap().get("eaddr",String.class);
 			slingModelBean.setEfullname(efullname);
 			slingModelBean.setEaddr(eaddr);
-
-		
+			ob.add(slingModelBean);
 			
 			
-			//To get Sub child Data
+                //To get Sub child Data Employee Info
 			
-			Resource subChildResource = itemResource.getChild("einfo");
+			Resource subChildResource = itemResource1.getChild("einfo");
 			Iterator<Resource> item1 = subChildResource.listChildren();
 			while (item1.hasNext()) {
-				Resource itemResource1 = item1.next();
-			LOG.info("SubItem:"+itemResource1.getName());
-				String eGender= itemResource1.getValueMap().get("egender",String.class);
+				Resource itemResource2 = item1.next();
+			LOG.info("SubItem:"+itemResource2.getName());
+				String eGender= itemResource2.getValueMap().get("gender",String.class);
 			LOG.info("Gender:"+eGender);
-				String eDoj = itemResource1.getValueMap().get("edoj",String.class);
-			LOG.info("DOJ:"+eDoj);
-				slingModelBean.setEgender(eGender);
-				slingModelBean.setEdoj(eDoj);
-				
-				
-				
-		 //sub1 child Student Login Details
-			Resource sub1ChildResource = itemResource1.getChild("studentlogin");
-		LOG.info("Sub1Item:"+sub1ChildResource.getName());
-			Iterator<Resource> item2 = sub1ChildResource.listChildren();
+			slingModelBean.setGender(eGender);
+			
+			
+			Resource subChildResource1 = itemResource2.getChild("staffinfo");
+			Iterator<Resource> item2 = subChildResource1.listChildren();
 			while (item2.hasNext()) {
-				Resource itemResource2 = item2.next();
-				String userName = itemResource2.getValueMap().get("username",String.class);
-				LOG.info("STUDENTUSERNAME:"+userName);
-				String password = itemResource2.getValueMap().get("password",String.class);
-				slingModelBean.setUsername(userName);
-				slingModelBean.setPassword(password);
-			LOG.info("PASSWORD:"+password);
-				
-				obj.add(slingModelBean);
+				Resource itemResource3 = item2.next();
+				String doj = itemResource3.getValueMap().get("doj",String.class);
+				slingModelBean.setDoj(doj);
+				LOG.info("DOJ:"+doj);
 				
 			}
-				
 			}
-		}
-		return obj;
+			}
+		
+		return ob;
 			
 		}
 	
 	
-	/*//einfoinfo
-	public ArrayList<SlingModelBean> getMultiFiedEinfo() {
-		ArrayList<SlingModelBean> obb=new ArrayList<SlingModelBean>();
-		SlingModelBean slingModelBean = new SlingModelBean();
-		Resource child1 = resource.getChild("einfo");
-		Iterator<Resource> listChildren = child1.listChildren();
-		while(listChildren.hasNext()) {
-			Resource next1 = listChildren.next();
-			String egender = next1.getValueMap().get("egender",String.class);
-			String edoj = next1.getValueMap().get("edoj",String.class);
-			
-			slingModelBean.setEgender(egender);
-			slingModelBean.setEdoj(edoj);
-			
-			obb.add(slingModelBean);
-		}
-		return obb;
-		}*/
+	
+}
 		
 	
 
 
-}
 
 	
 	

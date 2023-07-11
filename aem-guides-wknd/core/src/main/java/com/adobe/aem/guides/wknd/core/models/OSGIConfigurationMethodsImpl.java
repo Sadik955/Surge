@@ -5,7 +5,7 @@ import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 
-import com.adobe.aem.guides.wknd.core.services.OSGIConfigurationMethods;
+import com.adobe.aem.guides.wknd.core.service.OSGIConfigurationMethods;
 
 @Model(adaptables=SlingHttpServletRequest.class,
 defaultInjectionStrategy=DefaultInjectionStrategy.OPTIONAL)

@@ -248,10 +248,10 @@
                                 sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
                                 fieldLabel="Employee Image"
                                 name="./eimage"/>
-                            <nestedmultifield
+                            <nestedmultifieldnodes
                                 jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/coral/foundation/container"
-                                composite="true">
+                                jcr:title="Employee Details"
+                                sling:resourceType="granite/ui/components/coral/foundation/container">
                                 <items jcr:primaryType="nt:unstructured">
                                     <well
                                         jcr:primaryType="nt:unstructured"
@@ -262,7 +262,6 @@
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
                                                 composite="{Boolean}true"
-                                                fieldDescription="Employee Details"
                                                 fieldLabel="Employee Details"
                                                 name="./eaddress">
                                                 <field
@@ -273,31 +272,29 @@
                                                         <efullname
                                                             jcr:primaryType="nt:unstructured"
                                                             sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
-                                                            fieldLabel="Full Name"
+                                                            fieldLabel="Employee Full Name"
                                                             name="./efullname"/>
                                                         <eaddr
                                                             jcr:primaryType="nt:unstructured"
                                                             sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
-                                                            fieldLabel="Permanent Address"
+                                                            fieldLabel="Employee Address"
                                                             name="./eaddr"/>
                                                         <einfo
                                                             jcr:primaryType="nt:unstructured"
                                                             sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
                                                             composite="{Boolean}true"
-                                                            fieldDescription="Employee Details"
                                                             fieldLabel="Employee Info"
-                                                            required="false">
+                                                            name="./einfo">
                                                             <field
                                                                 jcr:primaryType="nt:unstructured"
                                                                 sling:resourceType="granite/ui/components/coral/foundation/container"
-                                                                emptyText="Employee info"
                                                                 name="./einfo">
                                                                 <items jcr:primaryType="nt:unstructured">
-                                                                    <egender
+                                                                    <gender
                                                                         jcr:primaryType="nt:unstructured"
                                                                         sling:resourceType="granite/ui/components/coral/foundation/form/radiogroup"
                                                                         fieldLabel="Gender"
-                                                                        name="./egender">
+                                                                        name="./gender">
                                                                         <items jcr:primaryType="nt:unstructured">
                                                                             <male
                                                                                 jcr:primaryType="nt:unstructured"
@@ -308,37 +305,26 @@
                                                                                 text="Female"
                                                                                 value="Female"/>
                                                                         </items>
-                                                                    </egender>
-                                                                    <edoj
-                                                                        jcr:primaryType="nt:unstructured"
-                                                                        sling:resourceType="granite/ui/components/coral/foundation/form/datepicker"
-                                                                        fieldLabel="Date Of Joining"
-                                                                        name="./edoj"/>
-                                                                    <studentlogin
+                                                                    </gender>
+                                                                    <staffinfo
                                                                         jcr:primaryType="nt:unstructured"
                                                                         sling:resourceType="granite/ui/components/coral/foundation/form/multifield"
                                                                         composite="{Boolean}true"
-                                                                        fieldDescription="Login Details"
-                                                                        fieldLabel="Student Login Details"
-                                                                        required="false">
+                                                                        fieldLabel="Staff Info"
+                                                                        name="./staffinfo">
                                                                         <field
                                                                             jcr:primaryType="nt:unstructured"
                                                                             sling:resourceType="granite/ui/components/coral/foundation/container"
-                                                                            emptyText="Student Login">
+                                                                            name="./staffinfo">
                                                                             <items jcr:primaryType="nt:unstructured">
-                                                                                <username
+                                                                                <doj
                                                                                     jcr:primaryType="nt:unstructured"
-                                                                                    sling:resourceType="/libs/granite/ui/components/coral/foundation/form/textfield"
-                                                                                    fieldLabel="Student UserName"
-                                                                                    name="./username"/>
-                                                                                <password
-                                                                                    jcr:primaryType="nt:unstructured"
-                                                                                    sling:resourceType="granite/ui/components/coral/foundation/form/password"
-                                                                                    fieldLabel="Password"
-                                                                                    name="./password"/>
+                                                                                    sling:resourceType="granite/ui/components/coral/foundation/form/datepicker"
+                                                                                    fieldLabel="Date Of Joining"
+                                                                                    name="./doj"/>
                                                                             </items>
                                                                         </field>
-                                                                    </studentlogin>
+                                                                    </staffinfo>
                                                                 </items>
                                                             </field>
                                                         </einfo>
@@ -348,7 +334,7 @@
                                         </items>
                                     </well>
                                 </items>
-                            </nestedmultifield>
+                            </nestedmultifieldnodes>
                         </items>
                     </employee>
                 </items>

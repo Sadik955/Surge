@@ -1,4 +1,4 @@
-package com.adobe.aem.guides.wknd.core.services;
+package com.adobe.aem.guides.wknd.core.service;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;

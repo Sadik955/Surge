@@ -15,8 +15,12 @@ import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
 import org.apache.sling.servlets.annotations.SlingServletPaths;
 import org.apache.sling.servlets.annotations.SlingServletResourceTypes;
 import org.osgi.service.component.annotations.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import com.day.cq.wcm.api.Page;
+import com.day.cq.wcm.api.PageFilter;
 import com.day.cq.wcm.api.PageManager;
 
 @Component(service=Servlet.class)  //registering servlet
@@ -25,6 +29,7 @@ import com.day.cq.wcm.api.PageManager;
 							extensions={"txt","json","xml"})
 @SlingServletPaths(value="/bin/demo/recent")
 public class DSOSGISServiceExample extends SlingSafeMethodsServlet{
+	private static final Logger LOG=LoggerFactory.getLogger(DSOSGISServiceExample.class);
 	
 	protected void doGet(SlingHttpServletRequest req,SlingHttpServletResponse res) throws IOException {
 		
@@ -36,7 +41,7 @@ public class DSOSGISServiceExample extends SlingSafeMethodsServlet{
 		ResourceResolver rr=req.getResourceResolver();           //to all configuration and connectivity
 		PageManager pageManager=rr.adaptTo(PageManager.class);   //adaptTo() : is responsible to convert resource to an object
 		Page page= pageManager.getPage(pagePath);                //From Page manager we're getting pages and also perform CRUD operations
-		Iterator<Page> childPages=page.listChildren();          //listChildern(): which will iterate the child pages of particular page
+		Iterator<Page> childPages=page.listChildren(new PageFilter(),true);        //listChildern(): which will iterate the child pages of particular page
 		
 		JsonArrayBuilder jab=Json.createArrayBuilder();
 		
@@ -45,6 +50,7 @@ public class DSOSGISServiceExample extends SlingSafeMethodsServlet{
 			
 			Page next =childPages.next();	
 			JsonObjectBuilder job=Json.createObjectBuilder(); //JsonObjectBuilder is Responsible to store Json Object
+			LOG.info("childPages:"+next.getTitle());
 			job.add("Title", next.getTitle());  //getting title
 			job.add("Path",next.getPath());     //getting path
 			jab.add(job);                      //Adding to array object

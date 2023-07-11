@@ -9,9 +9,9 @@ Image:<img src="${sdk.image}" alt="image"/>
 <h2>GetParent: ${sdk.parent}</h2>
 
 <sly data-sly-list.obj="${sdk.multiChildNodes}">
-Full Name:${obj.fullname}<br>
-ZipCode:${obj.zipcode}<br>
-Permanent Addrss:${obj.paddress}<br>
+<h2>Student Full Name:${obj.fullname}</h2><br>
+<h2>ZipCode:${obj.zipcode}</h2><br>
+<h2>Permanent Addrss:${obj.paddress}</h2><br>
 </sly>
 
 <h2>Employee Name:${sdk.ename}</h2>
@@ -19,12 +19,9 @@ Permanent Addrss:${obj.paddress}<br>
 Employee img:<img src="${sdk.eimage}" alt="image"/><br>
 
 <sly data-sly-list.ob="${sdk.nestedMultiFieldNode}">
-Employee full Name:${ob.efullname}<br>
-Employee Address:${ob.eaddr}<br>
-Gender:${ob.egender}<br>
-Date Of joining:${'yyyy-MM-dd'@format=ob.edoj}<br>
-Student UserName:${ob.username}<br>
-Password:${ob.password}
+<h2>Employee Full Name :${ob.efullname}</h2><br>
+<h2>Employee Address:${ob.eaddr}</h2>
+<h2>Gender:${ob.gender}</h2>
+<h2>Date Of joining:${'yyyy-MM-dd'@format=ob.doj}</h2><br>
 </sly>
-
 
