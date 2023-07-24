@@ -1,5 +1,7 @@
 package com.adobe.aem.guides.wknd.core.bean;
 
+import org.apache.sling.api.resource.Resource;
+
 public class SlingModelBean {
 	public String fullname;
 	public String zipcode;
@@ -13,6 +15,12 @@ public class SlingModelBean {
 	public String doj;
 	
 
+
+	
+
+	public SlingModelBean(Resource item) {
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getFullname() {
 		return fullname;

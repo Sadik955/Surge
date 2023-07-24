@@ -1,7 +1,9 @@
 package com.adobe.aem.guides.wknd.core.models;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -9,15 +11,12 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.adobe.aem.guides.wknd.core.bean.SlingModelBean;
-
-@Model(adaptables= {SlingHttpServletRequest.class,Resource.class},defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-public class SlingModelPractice {
+@Model(adaptables= {SlingHttpServletRequest.class,Resource.class,},adapters = SlingModelPracticeImp.class,defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+public class SlingModelPractice implements SlingModelPracticeImp{
 	
 	private static final Logger LOG=LoggerFactory.getLogger(SlingModelPractice.class);
 	
@@ -93,45 +92,140 @@ public class SlingModelPractice {
 	@Inject
 	Resource resource;
 	
+	
+	public String getResourceName() {
+		return resource.getName();
+	}
+	
 	public String getPath() {
 		return resource.getPath();	
 	}
 	 
 	
 	public String getParent() {
-		Resource parent=resource.getParent();
-		String parentnodename=parent.getName();
-		return parentnodename;
+		String parent=resource.getParent().getPath();
+		
+		
+		return parent;
 	}
 	
-	@ChildResource
+/*	@ChildResource
 	Resource address;
-	public ArrayList<SlingModelBean> getMultiChildNodes() {
+	
+	public List<SlingModelBean> getMultiChildNodesMap(){
+
+	    ArrayList<SlingModelBean> object=new ArrayList<SlingModelBean>();
 		
-		ArrayList<SlingModelBean> object=new ArrayList<SlingModelBean>();
-		SlingModelBean slingModelBean = new SlingModelBean();
 		                                        
-		Iterator<Resource> itemResources = address.listChildren();
-		while(itemResources.hasNext()) {
-			
-			Resource itemResource = itemResources.next();
-			//To Get the Data
-			String fullname= itemResource.getValueMap().get("fullname",String.class);
-			String zipcode= itemResource.getValueMap().get("zipcode",String.class);
-			String paddress= itemResource.getValueMap().get("paddress",String.class);
-            //To Set the Data
-			slingModelBean.setFullname(fullname);
-			slingModelBean.setZipcode(zipcode);
-			slingModelBean.setPaddress(paddress);
-		
-			object.add(slingModelBean);
-			
+        try {
+        	Resource child = resource.getChild("address");
+        	if(child!=null) {
+        		for(Resource item:child.getChildren()) {
+        			String fullname= item.getValueMap().get("fullname",String.class);
+        			String zipcode= item.getValueMap().get("zipcode",String.class);
+        			String paddress= item.getValueMap().get("paddress",String.class);
+        			
+        			object.add(new SlingModelBean(item));
+        		}
+        	}
+        	
 			
 		}
+        catch(Exception e) {
+        	
+        }
 		return object;
+	}*/
+
+	
+	
+	//Multi field Using Map
+	@Override
+	public List<Map<String,String>> getMultiChildNodesMap() {
+		 List<Map<String,String>> object=new ArrayList<>();
+		 try {
+			 Resource child = resource.getChild("address");
+			 if(child!=null) {
+				 for(Resource item:child.getChildren()) {
+					 Map<String,String> sadikMap=new HashMap<>();
+					 sadikMap.put("fullname", item.getValueMap().get("fullname",String.class));
+					 sadikMap.put("zipcode", item.getValueMap().get("zipcode",String.class));
+					 sadikMap.put("paddress", item.getValueMap().get("paddress",String.class));
+					 object.add(sadikMap);
+				 }
+			 }
+		 }
+		 catch(Exception e){ 
+			e.getMessage();
+			 
+		 }
+		return object;
+		
+		
+		
+		
 	}
 	
-           //NestedField
+	
+	
+	//NestedMultifield using map
+	
+	
+	public List<Map<String,String>> getNestedMultiFieldMap() {
+		 List<Map<String,String>> object1=new ArrayList<>();
+		 try {
+			 Resource child = resource.getChild("eaddress");
+			 if(child!=null) {
+				 for(Resource item7:child.getChildren()) {
+					 Map<String,String> kalyanMap=new HashMap<>();
+					 kalyanMap.put("efullname", item7.getValueMap().get("efullname",String.class));
+					 kalyanMap.put("eaddr", item7.getValueMap().get("eaddr",String.class));
+					 
+					 
+					 //sub child
+					 
+					 Resource child2 = item7.getChild("einfo");
+					 if(child2!=null) {
+						 for(Resource item8:child2.getChildren()) {
+							
+							 kalyanMap.put("gender", item8.getValueMap().get("gender",String.class));
+							
+							 
+					//Sub1 Child	
+							 Resource child3 = item8.getChild("staffinfo");
+							 if(child3!=null) {
+								 for(Resource item9:child3.getChildren()) {
+									
+									 kalyanMap.put("doj", item9.getValueMap().get("doj",String.class));
+									
+							 
+						 }
+							 
+							 }
+					 }
+					 object1.add(kalyanMap);
+				 }
+			 }
+			
+		 
+				 
+			 }
+		 }
+		 catch(Exception e){ 
+			e.getMessage();
+			 
+		 }
+		return object1;
+	
+	
+	
+	
+	}
+	
+}
+
+     
+	/*//NestedField
 	public ArrayList<SlingModelBean> getNestedMultiFieldNode() {
 		ArrayList<SlingModelBean> ob=new ArrayList<SlingModelBean>();
 		SlingModelBean slingModelBean = new SlingModelBean();
@@ -141,6 +235,7 @@ public class SlingModelPractice {
 		Iterator<Resource> item = childResource.listChildren();
 		while(item.hasNext()) {
 			
+		
 			Resource itemResource1 = item.next();
 			
 			//Nested Multi field Data Employee Tab
@@ -171,17 +266,23 @@ public class SlingModelPractice {
 				slingModelBean.setDoj(doj);
 				LOG.info("DOJ:"+doj);
 				
+				
+				
+				
 			}
 			}
 			}
 		
 		return ob;
 			
-		}
+		}*/
 	
 	
 	
-}
+	
+	
+
+
 		
 	
 
